@@ -1,7 +1,7 @@
 from yfinance import Tickers
 
 class StockService:
-    def __init__(self, stocks):
+    def __init__(self, stocks: list[tuple]):
         self.stocks = stocks
         self.symbols = list(set(stock[0] for stock in stocks))
 

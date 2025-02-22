@@ -1,18 +1,21 @@
+from stock import Stock
+from typing import NoReturn
+
 class StockReporter:
-    def __init__(self, service):
-        self.service = service
+    def __init__(self, borderChar:str = "•", borderLen:int = 40):
+        borderChar = borderChar
+        borderLen = borderLen
+        self.border = borderChar * borderLen
+
+    def display_stock(self, stock: Stock) -> NoReturn:
+        profit_emoji = "📈" if stock.profit > 0 else "📉"
         
-    def display_stock(self, stock, current_price):
-        holdings, profit, profit_percentage = self.service.calculate_metrics(stock, current_price)
-        profit_emoji = "📈" if profit > 0 else "📉"
-        border = "•" * 40
-        
-        print(f"\n{border}")
-        print(f"{'📈 Stock name:':<25} {stock[0]}")
-        print(f"{'🔢 Quantity:':<25} {stock[1]}")
-        print(f"{'💵 Purchase price:':<25} ${stock[2]:.2f}")
-        print(f"{'💰 Current price:':<25} ${current_price:.2f}")
-        print(f"{'💎 Holdings:':<25} ${holdings:.2f}")
-        print(f"{profit_emoji + ' Profit:':<25} ${profit:.2f}")
-        print(f"{profit_emoji + ' Profit %:':<25} {profit_percentage:.2f}%")
-        print(f"{border}\n")
+        print(f"\n{self.border}")
+        print(f"{'📈 Stock symbol:':<25} {stock.symbol}")
+        print(f"{'🔢 Shares:':<25} {stock.shares}")
+        print(f"{'💵 Purchase price:':<25} ${stock.purchase_price:.2f}")
+        print(f"{'💰 Current price:':<25} ${stock.current_price:.2f}")
+        print(f"{'💎 Holdings:':<25} ${stock.holdings:.2f}")
+        print(f"{profit_emoji + ' Profit:':<25} ${stock.profit:.2f}")
+        print(f"{profit_emoji + ' Profit %:':<25} {stock.profit_percentage:.2f}%")
+        print(f"{self.border}\n")
