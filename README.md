@@ -32,7 +32,7 @@ pip install -r requirements.txt
    from models import Stock
 
    stocks: list[Stock] = [
-       ["STOCK_SYMBOL", QUANTITY, PURCHASE_PRICE],
+       ["STOCK_SYMBOL", SHARES, PURCHASE_PRICE],
        # Example:
        ["AAPL", 2, 124.56],
    ]
