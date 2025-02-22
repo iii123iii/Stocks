@@ -41,7 +41,7 @@ pip install -r requirements.txt
 3. Run the application:
 
    ```bash
-   python main.py
+   python3 main.py
    ```
 
 ## Output Example 🖥️
