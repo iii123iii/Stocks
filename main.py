@@ -1,6 +1,6 @@
 from yfinance import Tickers
+from config import stocks
 
-stocks = [["AAPL", 2, 84.26], ["AAPL", 3, 245.55], ["GOOGL", 4, 45]]
 owned_stocks = []
 
 owned_stocks = list(set(stock[0] for stock in stocks))
