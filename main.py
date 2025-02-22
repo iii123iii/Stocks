@@ -1,7 +1,7 @@
 from config import stocks
 from stock_service import StockService
 from stock_reporter import StockReporter
-from stock import Stock
+from models import StockData
 from typing import NoReturn
 
 def main() -> NoReturn:
@@ -15,8 +15,8 @@ def main() -> NoReturn:
         print("\nStock Portfolio Report:")
         print("-" * 50)
         for value in stocks:
-            if current_prices[value[0]] > 0:
-                stock = Stock(value[0], value[1], value[2], current_prices[value[0]])
+            if current_prices[value.symbol] > 0:
+                stock = StockData(value.symbol, value.shares, value.purchase_price, current_prices[value.symbol])
 
                 reporter.display_stock(stock)
             

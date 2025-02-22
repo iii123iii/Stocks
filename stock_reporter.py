@@ -1,4 +1,4 @@
-from stock import Stock
+from models import StockData
 from typing import NoReturn
 
 class StockReporter:
@@ -7,7 +7,7 @@ class StockReporter:
         borderLen = borderLen
         self.border = borderChar * borderLen
 
-    def display_stock(self, stock: Stock) -> NoReturn:
+    def display_stock(self, stock: StockData) -> NoReturn:
         profit_emoji = "📈" if stock.profit > 0 else "📉"
         
         print(f"\n{self.border}")

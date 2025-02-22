@@ -5,6 +5,12 @@ class Stock:
     symbol: str
     shares: int
     purchase_price: float
+
+@dataclass
+class StockData:
+    symbol: str
+    shares: int
+    purchase_price: float
     current_price: float
 
     @property
