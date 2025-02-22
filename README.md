@@ -24,23 +24,25 @@ pip install -r requirements.txt
 
 ## Usage 💡
 
-1. Create a `config.py` file
+1. Remove the `.txt` extension from the `config.py.txt` file
 
-2. Add your stocks to the `config.py` file in the format:
+2. Add your stocks to the `config.py` file in this format:
 
-```python
-stocks = [
-    ["STOCK_SYMBOL", QUANTITY, PURCHASE_PRICE],
-    # Example:
-    ["AAPL", 2, 124.56],
-]
-```
+   ```python
+   from models import Stock
+
+   stocks: list[Stock] = [
+       ["STOCK_SYMBOL", QUANTITY, PURCHASE_PRICE],
+       # Example:
+       ["AAPL", 2, 124.56],
+   ]
+   ```
 
 3. Run the application:
 
-```bash
-python main.py
-```
+   ```bash
+   python main.py
+   ```
 
 ## Output Example 🖥️
 
