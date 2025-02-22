@@ -21,5 +21,3 @@ for value in stocks:
         grouped_stocks[value[0]] = [value]
     else:
         grouped_stocks[value[0]].append(value)
-
-print(grouped_stocks)
