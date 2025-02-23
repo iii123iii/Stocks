@@ -4,7 +4,6 @@ A simple Python application to track your stock portfolio performance using real
 
 ## Features 🌟
 
-- Real-time stock price tracking
 - Multiple purchase tracking for the same stock
 - Profit/Loss calculation
 - Percentage gain/loss
