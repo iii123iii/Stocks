@@ -22,4 +22,4 @@ class StockService:
             return prices
         except Exception as e:
             logging.error(f"Failed to fetch stock data: {str(e)}")
-            raise ConnectionError("Failed to connect to Yahoo Finance API") from e
+            raise ConnectionError("Failed to connect to the Yahoo Finance API") from e
