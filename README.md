@@ -7,7 +7,7 @@ A simple Python application to track your stock portfolio performance using real
 - Multiple purchase tracking for the same stock
 - Profit/Loss calculation
 - Percentage gain/loss
-- Visual emoji indicators
+- Visual emojis and color indicators
 - Clean, formatted output
 
 ## Requirements 📋
