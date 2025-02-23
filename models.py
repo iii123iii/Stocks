@@ -6,6 +6,14 @@ class Stock:
     shares: int
     purchase_price: float
 
+    def __post_init__(self):
+        if not self.symbol or not isinstance(self.symbol, str):
+            raise ValueError("Symbol must be a non-empty string")
+        if self.shares <= 0:
+            raise ValueError("Shares must be positive")
+        if self.purchase_price <= 0:
+            raise ValueError("Purchase price must be positive")
+
 @dataclass
 class StockData:
     symbol: str

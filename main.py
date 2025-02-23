@@ -1,27 +1,50 @@
+import logging
 from config import stocks
 from stock_service import StockService
 from stock_reporter import StockReporter
-from models import StockData
+from models import StockData, Stock
 from typing import NoReturn
 
+def setup_logging():
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
+
+def validate_config(stocks: list[Stock]) -> None:
+    if not stocks:
+        raise ValueError("No stocks configured in config.py")
+
 def main() -> NoReturn:
+    setup_logging()
+    
     try:
+        validate_config(stocks)
         service = StockService(stocks)
         reporter = StockReporter()
         
-        print("Fetching current stock prices...")
+        logging.info("Fetching current stock prices...")
         current_prices = service.get_current_prices()
         
-        print("\nStock Portfolio Report:")
-        print("-" * 50)
-        for value in stocks:
-            if current_prices[value.symbol] > 0:
-                stock = StockData(value.symbol, value.shares, value.purchase_price, current_prices[value.symbol])
-
-                reporter.display_stock(stock)
+        logging.info("Generating stock portfolio report...")
+        for stock in stocks:
+            current_price = current_prices[stock.symbol]
+            if current_price > 0:
+                stock_data = StockData(
+                    stock.symbol, 
+                    stock.shares, 
+                    stock.purchase_price, 
+                    current_price
+                )
+                reporter.display_stock(stock_data)
+            else:
+                logging.warning(f"Skipping {stock.symbol} due to invalid price data")
             
+    except ConnectionError as e:
+        logging.error(f"Failed to connect to stock service: {e}")
+        raise
     except Exception as e:
-        print(f"Fatal error in main program: {str(e)}")
+        logging.error(f"Fatal error in main program: {e}")
         raise
 
 if __name__ == "__main__":
