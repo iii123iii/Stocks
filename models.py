@@ -32,3 +32,7 @@ class StockData:
     @property
     def profit_percentage(self) -> float:
         return ((self.current_price - self.purchase_price) / self.purchase_price) * 100
+    
+    @property
+    def isProfit(self) -> bool:
+        return self.profit > 0

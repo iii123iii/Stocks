@@ -3,21 +3,22 @@ from typing import NoReturn
 from models import StockData
 
 class StockReporter:
-    def __init__(self, borderChar:str = "•", borderLen:int = 40):
+    def __init__(self, borderChar:str = "•", borderLen:int = 40, stockStaticColor: str = "yellow"):
         borderChar = borderChar
         borderLen = borderLen
         self.border = borderChar * borderLen
+        self.stockStaticColor = stockStaticColor
 
     def display_stock(self, stock: StockData) -> NoReturn:
-        isProfit = stock.profit > 0
-        profit_emoji = "📈" if isProfit else "📉"
+        profit_emoji = "📈" if stock.isProfit else "📉"
+        stockDynamicColor = "green" if stock.isProfit else "red"
         
         print(f"\n{self.border}")
-        printColor(f"{'📈 Stock symbol:':<25} [yellow]{stock.symbol}[/]")
-        printColor(f"{'🔢 Shares:':<25} [yellow]{stock.shares}[/]")
-        printColor(f"{'💵 Purchase price:':<25} [yellow]${stock.purchase_price:.2f}[/]")
-        printColor(f"{'💰 Current price:':<25} [{"green" if isProfit else "red"}]${stock.current_price:.2f}[/]")
-        printColor(f"{'💎 Holdings:':<25} [{"green" if isProfit else "red"}]${stock.holdings:.2f}[/]")
-        printColor(f"{profit_emoji + ' Profit:':<25} [{"green" if isProfit else "red"}]${stock.profit:.2f}[/]")
-        printColor(f"{profit_emoji + ' Profit %:':<25} [{"green" if isProfit else "red"}]{stock.profit_percentage:.2f}%[/]")
+        printColor(f"{'📈 Stock symbol:':<25} [{self.stockStaticColor}]{stock.symbol}[/]")
+        printColor(f"{'🔢 Shares:':<25} [{self.stockStaticColor}]{stock.shares}[/]")
+        printColor(f"{'💵 Purchase price:':<25} [{self.stockStaticColor}]${stock.purchase_price:.2f}[/]")
+        printColor(f"{'💰 Current price:':<25} [{stockDynamicColor}]${stock.current_price:.2f}[/]")
+        printColor(f"{'💎 Holdings:':<25} [{stockDynamicColor}]${stock.holdings:.2f}[/]")
+        printColor(f"{profit_emoji + ' Profit:':<25} [{stockDynamicColor}]${stock.profit:.2f}[/]")
+        printColor(f"{profit_emoji + ' Profit %:':<25} [{stockDynamicColor}]{stock.profit_percentage:.2f}%[/]")
         print(f"{self.border}\n")
