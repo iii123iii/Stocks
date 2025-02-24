@@ -1,4 +1,5 @@
 import logging
+from os import system, name
 from config import stocks
 from stock_service import StockService
 from stock_reporter import StockReporter
@@ -16,6 +17,11 @@ def validate_config(stocks: list[Stock]) -> None:
         raise ValueError("No stocks configured in config.py")
 
 def main() -> NoReturn:
+    if name == 'nt':
+        system('cls')
+    else:
+        system('clear')
+
     setup_logging()
     
     try:
