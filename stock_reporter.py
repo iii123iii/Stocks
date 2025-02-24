@@ -13,9 +13,9 @@ class StockReporter:
         profit_emoji = "📈" if isProfit else "📉"
         
         print(f"\n{self.border}")
-        print(f"{'📈 Stock symbol:':<25} {stock.symbol}")
-        print(f"{'🔢 Shares:':<25} {stock.shares}")
-        print(f"{'💵 Purchase price:':<25} ${stock.purchase_price:.2f}")
+        printColor(f"{'📈 Stock symbol:':<25} [yellow]{stock.symbol}[/]")
+        printColor(f"{'🔢 Shares:':<25} [yellow]{stock.shares}[/]")
+        printColor(f"{'💵 Purchase price:':<25} [yellow]${stock.purchase_price:.2f}[/]")
         printColor(f"{'💰 Current price:':<25} [{"green" if isProfit else "red"}]${stock.current_price:.2f}[/]")
         printColor(f"{'💎 Holdings:':<25} [{"green" if isProfit else "red"}]${stock.holdings:.2f}[/]")
         printColor(f"{profit_emoji + ' Profit:':<25} [{"green" if isProfit else "red"}]${stock.profit:.2f}[/]")
