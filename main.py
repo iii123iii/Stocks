@@ -30,17 +30,23 @@ def main() -> NoReturn:
         reporter = StockReporter()
         
         logging.info("Fetching current stock prices...")
-        current_prices = service.get_current_prices()
+        current_data = service.get_stock_ticker_data()
         
         logging.info("Generating stock portfolio report...")
         for stock in stocks:
-            current_price = current_prices[stock.symbol]
+            stock_ticker = current_data[stock.symbol]
+            current_price = stock_ticker[0]
+            currency = stock_ticker[1]
+            language = stock_ticker[2]
+
             if current_price > 0:
                 stock_data = StockData(
                     stock.symbol, 
                     stock.shares, 
                     stock.purchase_price, 
-                    current_price
+                    current_price,
+                    currency,
+                    language,
                 )
                 reporter.display_stock(stock_data)
             else:

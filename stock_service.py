@@ -9,13 +9,18 @@ class StockService:
         self.stocks = stocks
         self.symbols = list(set(stock.symbol for stock in stocks))
 
-    def get_current_prices(self) -> Dict[str, float]:
+    def get_stock_ticker_data(self) -> Dict[str, list[float, str, str]]:
         try:
             tickers = Tickers(" ".join(self.symbols)).tickers
             prices = {}
             for name, data in tickers.items():
                 try:
-                    prices[name] = data.info['currentPrice']
+                    ticker_list = []
+                    ticker_list.append(data.info['currentPrice'])
+                    ticker_list.append(data.info['financialCurrency'])
+                    ticker_list.append(data.info['language'])
+                    prices[name] = ticker_list
+
                 except KeyError:
                     logging.error(f"Could not fetch price for {name}")
                     prices[name] = 0.0

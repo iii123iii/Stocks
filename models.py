@@ -1,3 +1,4 @@
+from babel.numbers import format_currency
 from dataclasses import dataclass
 
 @dataclass
@@ -20,6 +21,8 @@ class StockData:
     shares: int
     purchase_price: float
     current_price: float
+    currency: str
+    language: str
 
     @property
     def holdings(self) -> float:
@@ -41,3 +44,6 @@ class StockData:
     @property
     def isProfit(self) -> bool:
         return self.profit > 0
+    
+    def formatNumber(self, number: float) -> str:
+        return format_currency(round(number, 2), self.currency, locale=self.language.replace('-', '_'))
