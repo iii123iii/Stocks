@@ -30,6 +30,11 @@ class StockData:
         return self.holdings - (self.purchase_price * self.shares)
     
     @property
+    def profitPerStock(self) -> float:
+        return self.profit / self.shares
+
+    
+    @property
     def profit_percentage(self) -> float:
         return ((self.current_price - self.purchase_price) / self.purchase_price) * 100
     

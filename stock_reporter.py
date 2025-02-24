@@ -20,5 +20,6 @@ class StockReporter:
         printColor(f"{'💰 Current price:':<25} [{stockDynamicColor}]${stock.current_price:.2f}[/]")
         printColor(f"{'💎 Holdings:':<25} [{stockDynamicColor}]${stock.holdings:.2f}[/]")
         printColor(f"{profit_emoji + ' Profit:':<25} [{stockDynamicColor}]${stock.profit:.2f}[/]")
+        printColor(f"{profit_emoji + ' Profit/Stock:':<25} [{stockDynamicColor}]${stock.profitPerStock:.2f}[/]")
         printColor(f"{profit_emoji + ' Profit %:':<25} [{stockDynamicColor}]{stock.profit_percentage:.2f}%[/]")
         print(f"{self.border}\n")
