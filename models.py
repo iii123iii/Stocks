@@ -1,7 +1,7 @@
 from babel.numbers import format_currency
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(frozen=True)
 class Stock:
     symbol: str
     shares: int
@@ -15,7 +15,7 @@ class Stock:
         if self.purchase_price <= 0:
             raise ValueError("Purchase price must be positive")
 
-@dataclass
+@dataclass(frozen=True)
 class StockData:
     symbol: str
     shares: int
@@ -25,16 +25,24 @@ class StockData:
     language: str
 
     @property
-    def holdings(self) -> float:
+    def __holdings(self) -> float:
         return self.current_price * self.shares
+
+    @property
+    def holdings(self) -> str:
+        return self.__formatNumber(self.__holdings)
     
     @property
-    def profit(self) -> float:
-        return self.holdings - (self.purchase_price * self.shares)
+    def __profit(self) -> float:
+        return self.__holdings - (self.purchase_price * self.shares)
     
     @property
-    def profitPerStock(self) -> float:
-        return self.profit / self.shares
+    def profit(self) -> str:
+        return self.__formatNumber(self.__profit)
+
+    @property
+    def profit_per_stock(self) -> str:
+        return self.__formatNumber(self.__profit / self.shares)
 
     
     @property
@@ -42,8 +50,8 @@ class StockData:
         return ((self.current_price - self.purchase_price) / self.purchase_price) * 100
     
     @property
-    def isProfit(self) -> bool:
-        return self.profit > 0
+    def is_profit(self) -> bool:
+        return self.__profit > 0
     
-    def formatNumber(self, number: float) -> str:
+    def __formatNumber(self, number: float) -> str:
         return format_currency(round(number, 2), self.currency, locale=self.language.replace('-', '_'))
